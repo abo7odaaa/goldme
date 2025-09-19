@@ -230,19 +230,19 @@ export function Comments({ postId }: CommentsProps) {
   };
 
   const renderComment = (comment: Comment, isReply = false) => (
-    <div key={comment.id} className={`flex space-x-3 rtl:space-x-reverse ${isReply ? 'mr-6 rtl:ml-6 rtl:mr-0' : ''}`}>
-      <Avatar className={`${isReply ? 'h-6 w-6' : 'h-8 w-8'} flex-shrink-0`}>
+    <div key={comment.id} className={`flex gap-2 sm:gap-3 ${isReply ? 'mr-4 sm:mr-6 rtl:ml-4 sm:rtl:ml-6 rtl:mr-0' : ''}`}>
+      <Avatar className={`${isReply ? 'h-6 w-6' : 'h-7 w-7 sm:h-8 sm:w-8'} flex-shrink-0 mt-1`}>
         <AvatarImage src={comment.user.avatar} alt={comment.user.name} />
         <AvatarFallback>{comment.user.name.charAt(0)}</AvatarFallback>
       </Avatar>
       
       <div className="flex-1 min-w-0">
-        <div className="bg-muted rounded-lg p-3">
-          <div className="flex items-center space-x-2 rtl:space-x-reverse mb-1">
+        <div className="bg-muted rounded-lg p-2.5 sm:p-3">
+          <div className="flex items-center gap-2 mb-1">
             <span className={`font-semibold ${isReply ? 'text-xs' : 'text-sm'} text-foreground`}>
               {comment.user.name}
             </span>
-            <span className={`${isReply ? 'text-xs' : 'text-xs'} text-muted-foreground`}>
+            <span className="text-xs text-muted-foreground">
               {comment.timestamp}
             </span>
           </div>
@@ -251,23 +251,23 @@ export function Comments({ postId }: CommentsProps) {
           </p>
         </div>
         
-        <div className="flex items-center mt-2 space-x-2 rtl:space-x-reverse">
+        <div className="flex items-center mt-2 gap-2">
           <Button
             variant="ghost"
             size="sm"
             onClick={() => handleLike(comment.id)}
-            className={`flex items-center space-x-1 rtl:space-x-reverse h-auto p-1 ${
+            className={`flex items-center gap-1 h-auto p-1 ${
               comment.isLiked ? 'text-red-500' : 'text-muted-foreground hover:text-red-500'
             }`}
           >
             <Heart className={`${isReply ? 'h-2.5 w-2.5' : 'h-3 w-3'} ${comment.isLiked ? 'fill-current' : ''}`} />
-            <span className={isReply ? 'text-xs' : 'text-xs'}>{comment.likes}</span>
+            <span className="text-xs">{comment.likes}</span>
           </Button>
           
           <Button
             variant="ghost"
             size="sm"
-            className={`${isReply ? 'text-xs' : 'text-xs'} text-muted-foreground hover:text-primary h-auto p-1`}
+            className="text-xs text-muted-foreground hover:text-primary h-auto p-1"
           >
             رد
           </Button>
@@ -277,24 +277,24 @@ export function Comments({ postId }: CommentsProps) {
   );
 
   return (
-    <div className="flex flex-col h-full max-h-screen">
+    <div className="flex flex-col h-full">
       {/* Comments Header */}
-      <div className="p-4 border-b border-border flex-shrink-0">
+      <div className="p-3 sm:p-4 border-b border-border flex-shrink-0">
         <h3 className="text-lg font-semibold text-foreground">
           التعليقات ({getTotalCommentsCount()})
         </h3>
       </div>
 
       {/* Comments List */}
-      <ScrollArea className="flex-1 min-h-0">
-        <div className="space-y-4 p-4">
+      <ScrollArea className="flex-1 overflow-hidden">
+        <div className="space-y-4 p-3 sm:p-4 pb-2">
           {comments.map((comment) => (
             <div key={comment.id} className="space-y-3">
               {renderComment(comment)}
               
               {/* Replies Section */}
               {comment.replies && comment.replies.length > 0 && (
-                <div className="mr-6 rtl:ml-6 rtl:mr-0">
+                <div className="mr-4 sm:mr-6 rtl:ml-4 sm:rtl:ml-6 rtl:mr-0">
                   <Button
                     variant="ghost"
                     size="sm"
@@ -326,37 +326,40 @@ export function Comments({ postId }: CommentsProps) {
         </div>
       </ScrollArea>
 
-      {/* Add Comment - Fixed positioning for mobile */}
-      <div className="p-4 border-t border-border bg-background flex-shrink-0">
-        <div className="flex space-x-2 rtl:space-x-reverse items-end">
-          <Avatar className="h-8 w-8 flex-shrink-0">
-            <AvatarImage src={avatar1} alt="أنت" />
-            <AvatarFallback>أ</AvatarFallback>
-          </Avatar>
-          
-          <div className="flex-1 min-w-0">
-            <Input
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              placeholder="اكتب تعليقاً..."
-              className="text-right resize-none min-h-[40px]"
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault();
-                  handleAddComment();
-                }
-              }}
-            />
+      {/* Add Comment - Mobile Optimized */}
+      <div className="border-t border-border bg-background flex-shrink-0 safe-area-inset-bottom">
+        <div className="p-3 sm:p-4">
+          <div className="flex gap-2 sm:gap-3 items-start">
+            <Avatar className="h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0 mt-1">
+              <AvatarImage src={avatar1} alt="أنت" />
+              <AvatarFallback>أ</AvatarFallback>
+            </Avatar>
+            
+            <div className="flex-1 min-w-0 max-w-full">
+              <div className="flex gap-2 items-end">
+                <Input
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                  placeholder="اكتب تعليقاً..."
+                  className="text-right h-9 sm:h-10 text-sm flex-1 min-w-0"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      handleAddComment();
+                    }
+                  }}
+                />
+                <Button
+                  onClick={handleAddComment}
+                  size="sm"
+                  disabled={!newComment.trim()}
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 flex-shrink-0 h-9 sm:h-10 w-9 sm:w-10 p-0"
+                >
+                  <Send className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                </Button>
+              </div>
+            </div>
           </div>
-          
-          <Button
-            onClick={handleAddComment}
-            size="sm"
-            disabled={!newComment.trim()}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 flex-shrink-0 h-[40px] px-3"
-          >
-            <Send className="h-4 w-4" />
-          </Button>
         </div>
       </div>
     </div>
