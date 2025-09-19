@@ -281,7 +281,7 @@ export function Comments({ postId }: CommentsProps) {
       {/* Comments Header */}
       <div className="p-3 sm:p-4 border-b border-border flex-shrink-0">
         <h3 className="text-lg font-semibold text-foreground">
-          تعليقات ({getTotalCommentsCount()})
+          التعليقات ({getTotalCommentsCount()})
         </h3>
       </div>
 
