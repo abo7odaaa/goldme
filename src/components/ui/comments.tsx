@@ -287,7 +287,7 @@ export function Comments({ postId }: CommentsProps) {
 
       {/* Comments List */}
       <ScrollArea className="flex-1 overflow-hidden">
-        <div className="space-y-4 p-3 sm:p-4 pb-2">
+        <div className="space-y-4 p-3 sm:p-4 pb-24 sm:pb-28">
           {comments.map((comment) => (
             <div key={comment.id} className="space-y-3">
               {renderComment(comment)}
@@ -327,9 +327,9 @@ export function Comments({ postId }: CommentsProps) {
       </ScrollArea>
 
       {/* Add Comment - Mobile Optimized */}
-      <div className="border-t border-border bg-background flex-shrink-0 safe-area-inset-bottom">
+      <div className="sticky bottom-0 z-20 border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 flex-shrink-0 safe-area-inset-bottom">
         <div className="p-3 sm:p-4">
-          <div className="flex gap-2 sm:gap-3 items-start">
+          <div className="flex gap-2 sm:gap-3 items-center">
             <Avatar className="h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0 mt-1">
               <AvatarImage src={avatar1} alt="أنت" />
               <AvatarFallback>أ</AvatarFallback>
