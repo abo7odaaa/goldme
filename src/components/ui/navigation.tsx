@@ -46,7 +46,7 @@ export function TopNavigation() {
   return (
     <div className="lg:hidden">
       {/* Top Actions Row */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border w-full">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm w-full">
         <div className="flex justify-between items-center px-3 sm:px-4 py-2 sm:py-3 max-w-full overflow-hidden" dir="rtl">
           <div className="flex items-center space-x-2 sm:space-x-3 space-x-reverse">
             {topActions.map((action) => (
@@ -67,10 +67,12 @@ export function TopNavigation() {
             </div>
           </div>
         </div>
+        {/* Golden separator line */}
+        <div className="h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-60"></div>
       </nav>
 
       {/* Main Navigation Row */}
-      <nav className="fixed top-14 sm:top-16 left-0 right-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border w-full">
+      <nav className="fixed top-[60px] sm:top-[68px] left-0 right-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border w-full">
         <div className="flex justify-around items-center py-1.5 sm:py-2 px-2 max-w-full" dir="rtl">
           {mobileNavigation.map((item) => {
             const isActive = location.pathname === item.href;
