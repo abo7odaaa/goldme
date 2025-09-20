@@ -39,9 +39,12 @@ const userPosts = [
     likes: 428,
     comments: 52,
     shares: 18,
+    saves: 67,
+    reactions: { like: 300, love: 89, fire: 39 },
     timestamp: "منذ يوم",
     isLiked: false,
     isSaved: false,
+    userReaction: undefined,
   },
   {
     id: "user-2",
@@ -55,9 +58,12 @@ const userPosts = [
     likes: 651,
     comments: 89,
     shares: 34,
+    saves: 123,
+    reactions: { like: 445, love: 156, hundred: 50 },
     timestamp: "منذ 3 أيام",
     isLiked: true,
     isSaved: true,
+    userReaction: "like",
   },
 ];
 

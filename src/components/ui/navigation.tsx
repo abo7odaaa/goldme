@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Button } from "./button";
 import { Badge } from "./badge";
+import { useScrollHide } from "@/hooks/useScrollHide";
 
 // Main navigation for desktop sidebar
 const navigation = [
@@ -42,11 +43,16 @@ const topActions = [
 // Top Navigation for Mobile (moved from bottom)
 export function TopNavigation() {
   const location = useLocation();
+  const isVisible = useScrollHide(50);
 
   return (
     <div className="lg:hidden">
       {/* Top Actions Row */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm w-full">
+      <nav 
+        className={`fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm w-full transition-transform duration-300 ease-in-out ${
+          isVisible ? 'transform translate-y-0' : 'transform -translate-y-full'
+        }`}
+      >
         <div className="flex justify-between items-center px-3 sm:px-4 py-2 sm:py-3 max-w-full overflow-hidden" dir="rtl">
           <div className="flex items-center space-x-2 sm:space-x-3 space-x-reverse">
             {topActions.map((action) => (
@@ -72,7 +78,11 @@ export function TopNavigation() {
       </nav>
 
       {/* Main Navigation Row */}
-      <nav className="fixed top-[60px] sm:top-[68px] left-0 right-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border w-full">
+      <nav 
+        className={`fixed left-0 right-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border w-full transition-all duration-300 ease-in-out ${
+          isVisible ? 'top-[60px] sm:top-[68px] transform translate-y-0' : 'top-0 transform -translate-y-full'
+        }`}
+      >
         <div className="flex justify-around items-center py-2 sm:py-3 px-2 max-w-full" dir="rtl">
           {mobileNavigation.map((item) => {
             const isActive = location.pathname === item.href;

@@ -21,9 +21,12 @@ interface PostProps {
   likes: number;
   comments: number;
   shares: number;
+  saves: number;
+  reactions: Record<string, number>;
   timestamp: string;
   isLiked?: boolean;
   isSaved?: boolean;
+  userReaction?: string;
 }
 
 interface CommentModalProps {
