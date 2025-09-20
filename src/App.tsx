@@ -22,7 +22,7 @@ const App = () => (
         <div className="flex min-h-screen w-full dark overflow-x-hidden">
           <SideNavigation />
           <TopNavigation />
-          <main className="flex-1 pt-[100px] sm:pt-[108px] lg:pt-0 min-w-0 overflow-x-hidden">
+          <main className="flex-1 pt-[104px] sm:pt-[112px] lg:pt-0 min-w-0 overflow-x-hidden">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/search" element={<Search />} />

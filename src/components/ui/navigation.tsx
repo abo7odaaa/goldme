@@ -73,7 +73,7 @@ export function TopNavigation() {
 
       {/* Main Navigation Row */}
       <nav className="fixed top-[60px] sm:top-[68px] left-0 right-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border w-full">
-        <div className="flex justify-around items-center py-1.5 sm:py-2 px-2 max-w-full" dir="rtl">
+        <div className="flex justify-around items-center py-2 sm:py-3 px-2 max-w-full" dir="rtl">
           {mobileNavigation.map((item) => {
             const isActive = location.pathname === item.href;
             return (
@@ -83,7 +83,7 @@ export function TopNavigation() {
                 className="relative flex flex-col items-center p-1 sm:p-2 rounded-lg transition-all duration-200 min-w-0 flex-1"
               >
                 <div className={`relative ${isActive ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}>
-                  <item.icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                  <item.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                   {item.badge && (
                     <Badge 
                       variant="destructive" 
@@ -93,9 +93,6 @@ export function TopNavigation() {
                     </Badge>
                   )}
                 </div>
-                <span className={`text-xs mt-0.5 sm:mt-1 truncate max-w-full ${isActive ? 'text-primary font-semibold' : 'text-muted-foreground'}`}>
-                  {item.name}
-                </span>
                 {isActive && (
                   <div className="absolute -bottom-1 w-6 h-0.5 bg-primary rounded-full" />
                 )}
